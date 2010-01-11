@@ -112,14 +112,8 @@ void DlgJournal::OnBnClickedButtonModify()
 	int ori_journal_select = pDlgJournal->GetCurSel();
 	if(ori_journal_select < 0 || ori_journal_select > (int)m_journal.GetAccountTable().size())
 		return ;
-	LIST_ACCOUNT::iterator pi = m_journal.GetAccountTable().begin();
-	for(int i = 0; i < ori_journal_select; i++)
-	{
-		pi++;
-	}
-	m_journal.GetAccountTable().set_current(pi);
 	d_account = new DlgAccountInput(this);
-	d_account->Create(m_journal.GetAccount());
+	d_account->Create(m_journal.GetAccount(ori_journal_select));
 	d_account->ShowWindow(SW_NORMAL);
 }
 

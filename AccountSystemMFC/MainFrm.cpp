@@ -65,7 +65,6 @@ int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)
 	d_Journal = new DlgJournal(this);
 	d_Journal->Create();
 	d_Journal->ShowWindow(SW_NORMAL);
-
 	return 0;
 }
 

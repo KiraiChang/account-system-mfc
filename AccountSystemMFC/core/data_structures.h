@@ -3,8 +3,9 @@
 
 
 //################################################################################
-//###############################Double Link List#####################################
+//######################################list########################################
 //################################################################################
+
 
 template<class T>
 class list
@@ -26,7 +27,7 @@ public:
 	iterator end(void)const																															{return mp_tail;}
 	iterator begin(void)const																														{return mp_head;}
 	T &back(void)const																																{return mp_current->m_data;}
-	T const_back(void)const																														{return mp_current->m_data;}
+	//T const_back(void)const																														{return mp_current->m_data;}
 	node *free_node(node *free_node)
 	{
 		node *tmp;
@@ -101,14 +102,24 @@ public:
 			return position;
 		}
 	}
+	void erase(int select)
+	{
+		iterator pi = begin();
+		for(int i =0; i<select; i++)
+			pi++;
+		pi = erase(pi);
+	}
 	void set_current(iterator current)																												{mp_current = current.mp_node;}
 	void pop_front(void)																																	{erase(begin());}
 	void pop_back(void)																																{erase(end());}
-	void set_id(unsigned short year, unsigned short month, unsigned short day, unsigned short id);
-	unsigned short get_year(void)const																											{return m_year;}
-	unsigned short get_month(void)const																											{return m_month;}
-	unsigned short get_day(void)const																												{return m_day;}
-	unsigned short get_id(void)const																												{return m_id;}
+	T &operator[](int select)
+	{
+		iterator pi = begin();
+		for(int i = 0; i<select; i++)
+			pi++;
+		set_current(pi);
+		return mp_current->m_data;
+	}
 };
 
 template<class T>
