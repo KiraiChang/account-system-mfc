@@ -12,7 +12,7 @@
 IMPLEMENT_DYNAMIC(DlgAccountInput, CDialog)
 
 DlgAccountInput::DlgAccountInput(CWnd* pParent /*=NULL*/)
-	: CDialog(DlgAccountInput::IDD, pParent)
+	: CDialog(DlgAccountInput::IDD, pParent),mp_account_name(NULL)
 {
 	mp_parent = pParent;
 	this->m_id = DlgAccountInput::IDD;
@@ -27,11 +27,17 @@ void DlgAccountInput::Release(void)
 {
 	if(mp_parent)
 		mp_parent = NULL;
+	if(mp_account_name != NULL)
+	{
+		mp_account_name->Release();
+		mp_account_name = NULL;
+	}
 }
 
 void DlgAccountInput::Create(Account account)
 {
 	m_account = account;
+	mp_account_name = AccountNameMgr::GetInstance();
 	CDialog::Create(m_id,NULL);
 	Update();
 }
@@ -43,6 +49,12 @@ void DlgAccountInput::Update(void)
 	CString str;
 	str.Format(_T("%04d"),m_account.GetAccount());
 	SetDlgItemText(IDC_EDIT_ACCOUNT_ID,str);
+	WCHAR wchar[256];
+	//把char轉成寬字元
+	MultiByteToWideChar( CP_ACP, 0,  mp_account_name->GetAccountName(m_account.GetAccount()),strlen( mp_account_name->GetAccountName(m_account.GetAccount()))+1, wchar, sizeof(wchar)/sizeof(wchar[0]));
+	str = wchar;
+	//str.Format(_T("%s"), mp_account_name->GetAccountName(m_account.GetAccount()));
+	SetDlgItemText(IDC_EDIT_ACCOUNT_NAME,str);
 	str.Format(_T("NT$%d"),m_account.GetDollar());
 	SetDlgItemText(IDC_EDIT_DOLLAR,str);
 	if(m_account.GetSide() == 0)

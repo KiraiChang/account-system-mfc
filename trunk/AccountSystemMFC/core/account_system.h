@@ -3,6 +3,45 @@
 #include"data_structures.h"
 
 //################################################################################
+//#############################Account Name########################################
+//################################################################################
+
+class AccountName
+{
+private:
+	char m_account_name[32];
+	unsigned int m_account_id;
+public:
+	AccountName(void):m_account_id(0)																									{Init();}
+	~AccountName(void)																															{Release();}
+	void Init(void);
+	void Release(void);
+	void SetData(const char* name, const unsigned int id);
+	const char *GetAccountName(const unsigned int id);
+};
+typedef list<AccountName> LIST_ACCOUNT_NAME;
+
+//################################################################################
+//#########################Account Name Mgr########################################
+//################################################################################
+
+class AccountNameMgr
+{
+private:
+	static AccountNameMgr *gp_singleton;
+	LIST_ACCOUNT_NAME lAccountName;
+	AccountNameMgr(void)																														{Init();}
+public:
+	~AccountNameMgr(void)																														{}
+	void Release(void);
+	void Init(void);
+	static AccountNameMgr *GetInstance(void);
+	void AddAccountName(const char *name, unsigned int id);
+	void EraseAccountName(int select);
+	const char *GetAccountName(unsigned int id);
+};
+
+//################################################################################
 //##################################Account########################################
 //################################################################################
 
@@ -56,6 +95,7 @@ public:
 	void Release(void);
 	LIST_ACCOUNT &GetAccountTable(void)																							{return vAccount;}
 	Account GetAccount(void)																														{return vAccount.back();}
+	Account GetAccount(int select)																													{return vAccount[select];}
 	unsigned short GetYear(void)																													{return m_year;}
 	unsigned short GetMonth(void)																													{return m_month;}
 	unsigned short GetDay(void)																														{return m_day;}

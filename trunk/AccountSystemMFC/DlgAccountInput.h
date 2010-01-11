@@ -7,6 +7,7 @@ class DlgAccountInput : public CDialog
 {
 	DECLARE_DYNAMIC(DlgAccountInput)
 	Account m_account;
+	AccountNameMgr * mp_account_name;
 	CWnd *mp_parent;
 	int m_id;
 public:
