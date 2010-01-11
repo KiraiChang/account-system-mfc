@@ -7,7 +7,7 @@
 // DlgJournal 對話方塊
 
 //typedef std::list<Account> JOURNAL;
-typedef DoubleLinkList<Account> JOURNAL;
+//typedef list<Account> JOURNAL;
 
 
 class DlgJournal : public CDialog
@@ -16,7 +16,7 @@ class DlgJournal : public CDialog
 	CWnd* mp_parent;
 	DlgAccountInput * d_account;
 	int m_id;
-	JOURNAL m_journal;
+	Journal m_journal;
 public:
 	DlgJournal(CWnd* pParent = NULL);   // 標準建構函式
 	virtual ~DlgJournal();
@@ -24,6 +24,7 @@ public:
 	void Create();
 	void Update();
 
+	void AccountInputOKReturn(Account account);
 	void OnOK(void);
 	void OnCancel(void);
 private:

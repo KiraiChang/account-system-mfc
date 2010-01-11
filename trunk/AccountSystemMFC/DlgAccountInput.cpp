@@ -4,6 +4,7 @@
 #include "stdafx.h"
 #include "AccountSystemMFC.h"
 #include "DlgAccountInput.h"
+#include "DlgJournal.h"
 
 
 // DlgAccountInput ¹ï¸Ü¤è¶ô
@@ -32,16 +33,42 @@ void DlgAccountInput::Create(Account account)
 {
 	m_account = account;
 	CDialog::Create(m_id,NULL);
+	Update();
 }
 
 void DlgAccountInput::Update(void)
 {
-	m_account.Release();
+	CButton* pRadioCredit=(CButton*)GetDlgItem(IDC_RADIO_CREDIT);
+	CButton* pRadioDebit=(CButton*)GetDlgItem(IDC_RADIO_DEBIT);
+	CString str;
+	str.Format(_T("%04d"),m_account.GetAccount());
+	SetDlgItemText(IDC_EDIT_ACCOUNT_ID,str);
+	str.Format(_T("NT$%d"),m_account.GetDollar());
+	SetDlgItemText(IDC_EDIT_DOLLAR,str);
+	if(m_account.GetSide() == 0)
+		pRadioCredit->SetCheck(BST_CHECKED);
+	else
+		pRadioDebit->SetCheck(BST_CHECKED);
 }
 
 
 void DlgAccountInput::OnOK(void)
 {
+	CButton* pRadioCredit=(CButton*)GetDlgItem(IDC_RADIO_CREDIT);
+	unsigned int account_name;
+	unsigned int nt_dollar;
+	unsigned short side;
+	account_name = GetDlgItemInt(IDC_EDIT_ACCOUNT_ID);
+	nt_dollar = GetDlgItemInt(IDC_EDIT_DOLLAR);
+	int state = pRadioCredit->GetCheck();
+	if(state == BST_CHECKED)
+		side = 0;
+	else
+		side = 1;
+	m_account.SetAccount(account_name);
+	m_account.SetDollar(nt_dollar);
+	m_account.SetSide(side);
+	((DlgJournal *)mp_parent)->AccountInputOKReturn(m_account);
 	DestroyWindow();
 }
 

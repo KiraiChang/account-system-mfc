@@ -286,6 +286,10 @@
 			Name="core"
 			>
 			<File
+				RelativePath=".\core\account_system.cpp"
+				>
+			</File>
+			<File
 				RelativePath=".\core\account_system.h"
 				>
 			</File>
