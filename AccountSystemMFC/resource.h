@@ -10,13 +10,14 @@
 #define IDC_EDIT_JOURNAL_NUMBER         1000
 #define IDC_EDIT_JOURNAL_ID             1000
 #define IDC_LIST_JOURNAL                1001
-#define IDC_COMBO1                      1002
-#define IDC_EDIT1                       1003
-#define IDC_RADIO1                      1005
+#define IDC_EDIT_DOLLAR                 1003
+#define IDC_EDIT_ACCOUNT_NAME           1004
+#define IDC_RADIO_CREDIT                1005
 #define IDC_RADIO2                      1006
 #define IDC_BUTTON_ADD                  1006
+#define IDC_RADIO_DEBIT                 1006
 #define IDC_BUTTON_MODIFY               1007
-#define IDC_BUTTON_EARSE                1008
+#define IDC_EDIT_ACCOUNT_ID             1007
 #define IDC_BUTTON_ERASE                1008
 
 // Next default values for new objects
